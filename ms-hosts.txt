@@ -1,0 +1,182 @@
+@ECHO OFF
+
+REM add-hosts.bat is intended to allow you to install instant protection
+REM from known sites all over the internet by redirecting them to an IP
+REM that does not exist.
+REM 
+REM Copyright (C) 1992-2019 Charles McDonald.
+
+set "params=%*"
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || ( echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+
+SET NEWLINE=^& @ECHO:
+SET HOSTFILE=System32\drivers\etc\hosts
+
+ATTRIB +A -H -R +S %WINDIR%\%HOSTFILE%
+
+@ECHO # Copyright (c) 1993-2009 Microsoft Corp. >%WINDIR%\%HOSTFILE%
+@ECHO # >>%WINDIR%\%HOSTFILE%
+@ECHO # This is a sample HOSTS file used by Microsoft TCP/IP for Windows. >>%WINDIR%\%HOSTFILE%
+@ECHO # >>%WINDIR%\%HOSTFILE%
+@ECHO # This file contains the mappings of IP addresses to host names. Each >>%WINDIR%\%HOSTFILE%
+@ECHO # entry should be kept on an individual line. The IP address should >>%WINDIR%\%HOSTFILE%
+@ECHO # be placed in the first column followed by the corresponding host name. >>%WINDIR%\%HOSTFILE%
+@ECHO # The IP address and the host name should be separated by at least one >>%WINDIR%\%HOSTFILE%
+@ECHO # space. >>%WINDIR%\%HOSTFILE%
+@ECHO # >>%WINDIR%\%HOSTFILE%
+@ECHO # Additionally, comments (such as these) may be inserted on individual >>%WINDIR%\%HOSTFILE%
+@ECHO # lines or following the machine name denoted by a '#' symbol. >>%WINDIR%\%HOSTFILE%
+@ECHO # >>%WINDIR%\%HOSTFILE%
+@ECHO # For example: >>%WINDIR%\%HOSTFILE%
+@ECHO # >>%WINDIR%\%HOSTFILE%
+@ECHO #   102.54.94.97   rhino.acme.com     # source server >>%WINDIR%\%HOSTFILE%
+@ECHO #    38.25.63.10   x.acme.com       # x client host >>%WINDIR%\%HOSTFILE%
+@ECHO: %NEWLINE% >>%WINDIR%\%HOSTFILE%
+
+@ECHO Standard information being added or created.
+
+FIND /C /I "localhost" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 @ECHO: %NEWLINE%^127.0.0.1 localhost >>%WINDIR%\%HOSTFILE%
+
+@ECHO: %NEWLINE% >>%WINDIR%\%HOSTFILE%
+
+@ECHO Additional information being added or created.
+
+FIND /C /I "telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "vortex.data.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 vortex.data.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "vortex-win.data.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 vortex-win.data.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "telecommand.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telecommand.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "telecommand.telemetry.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telecommand.telemetry.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "oca.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 oca.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "oca.telemetry.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 oca.telemetry.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "sqm.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 sqm.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "sqm.telemetry.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 sqm.telemetry.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "watson.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 watson.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "watson.telemetry.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 watson.telemetry.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "redir.metaservices.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 redir.metaservices.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "choice.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 choice.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "choice.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 choice.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "df.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 df.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "wes.df.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 wes.df.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "reports.wes.df.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 reports.wes.df.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "services.wes.df.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 services.wes.df.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "sqm.df.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 sqm.df.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "watson.ppe.telemetry.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 watson.ppe.telemetry.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "telemetry.appex.bing.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telemetry.appex.bing.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "telemetry.urs.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telemetry.urs.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "telemetry.appex.bing.net:443" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 telemetry.appex.bing.net:443 >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "settings-sandbox.data.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 settings-sandbox.data.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "vortex-sandbox.data.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 vortex-sandbox.data.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "watson.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 watson.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "survey.watson.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 survey.watson.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "watson.live.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 watson.live.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "statsfe2.ws.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 statsfe2.ws.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "corpext.msitadfs.glbdns2.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 corpext.msitadfs.glbdns2.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "compatexchange.cloudapp.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 compatexchange.cloudapp.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "cs1.wpc.v0cdn.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 cs1.wpc.v0cdn.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "a-0001.a-msedge.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 a-0001.a-msedge.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "fe2.update.microsoft.com.akadns.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 fe2.update.microsoft.com.akadns.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "statsfe2.update.microsoft.com.akadns.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 statsfe2.update.microsoft.com.akadns.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "sls.update.microsoft.com.akadns.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 sls.update.microsoft.com.akadns.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "diagnostics.support.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 diagnostics.support.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "corp.sts.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 corp.sts.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "statsfe1.ws.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 statsfe1.ws.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "pre.footprintpredict.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 pre.footprintpredict.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "i1.services.social.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 i1.services.social.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "i1.services.social.microsoft.com.nsatc.net" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 i1.services.social.microsoft.com.nsatc.net >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "feedback.windows.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 feedback.windows.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "feedback.microsoft-hohm.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 feedback.microsoft-hohm.com >>%WINDIR%\%HOSTFILE%
+
+FIND /C /I "feedback.search.microsoft.com" %WINDIR%\%HOSTFILE%
+IF %ERRORLEVEL% NEQ 0 ECHO: %NEWLINE%^0.0.0.0 feedback.search.microsoft.com >>%WINDIR%\%HOSTFILE%
+
+%WINDIR%\System32\ipconfig.exe /flushdns
+
+ATTRIB +A +H +R +S %WINDIR%\%HOSTFILE%
